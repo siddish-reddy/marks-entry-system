@@ -1,28 +1,32 @@
-from tkinter import *
+import tkinter as tk
 from tkinter import messagebox
 
-class DataScreen:
+class DataScreen(tk.Frame):
 
-    def close_window(self):
-        self.window.destroy()
+    def back(self):
+        self.destroy()
 
-    def __init__(self, window):
-        self.window = window
-    
-        self.l1 = Label(window, text='Entry')
-        self.l2 = Label(window, text='Subject Code')
-        self.l3 = Label(window, text='Script No.')
-        self.l4 = Label(window, text='Marks/Reg No.')
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
 
-        validation = self.window.register(self.only_numeric_input)
+        self.l1 = tk.Label(self, text='Entry')
+        self.l2 = tk.Label(self, text='Subject Code')
+        self.l3 = tk.Label(self, text='Script No.')
+        self.l4 = tk.Label(self, text='Marks/Reg No.')
+
+        validation = self._register(self.only_numeric_input)
         
-        self.t1 = Label(window, text='Entry')
-        self.t2 = Label(window, text='Subject Code')
-        self.t3 = Label(window, text='Something')
-        self.t4 = Entry(window, validate = "key",  validatecommand=(validation, '%S'))
 
-        self.enterData = Button(window, text="Enter Data", command = self.finalValidation)
-        self.quit = Button(window, text="Quit", command=self.close_window)
+        self.t1 = tk.Label(self, text='Entry')
+        self.t2 = tk.Label(self, text='Subject Code')
+        self.t3 = tk.Label(self, text='Something')
+        self.t4 = tk.Entry(self, validate="key",
+                        validatecommand=(validation, '%S'))
+
+        self.enterData = tk.Button(self, text="Enter Data",
+                                command=self.finalValidation)
+        self.back = tk.Button(self, text="Back", command=self.back)
 
         self.l1.place(x=200, y=100)
         self.l2.place(x=200, y=200)
@@ -34,10 +38,8 @@ class DataScreen:
         self.t3.place(x=500, y=300)
         self.t4.place(x=500, y=400)
 
-        self.quit.place(x=200, y=600)
+        self.back.place(x=200, y=600)
         self.enterData.place(x=500, y=600)
-
-
 
     def only_numeric_input(self, e):
         if e.isdigit():
@@ -55,13 +57,3 @@ class DataScreen:
             messagebox.showerror("Error", "Check Again")
         else:
             messagebox._show("Inkempo Macha", "Kottav Chance")
-        
-
-
-
-
-window = Tk()
-mywin = DataScreen(window)
-window.title('Hello Python')
-window.geometry("1366x760+10+10")
-window.mainloop()

@@ -1,9 +1,11 @@
 import tkinter as tk
-import tkinter.messagebox
+from tkinter import messagebox
 
+class FirstScreen(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
 
-class FirstScreen:
-    def __init__(self, window):
         self.subject_code = tk.StringVar()
         self.title = tk.StringVar()
         self.script_code = tk.IntVar()
@@ -12,26 +14,26 @@ class FirstScreen:
         self.data_operator_name = tk.StringVar()
         self.entry = tk.IntVar()
 
-        self.subject_code_label = tk.Label(window, text="Subject Code:")
-        self.title_label = tk.Label(window, text="Subject Title:")
-        self.script_code_label = tk.Label(window, text="Script Code:")
-        self.script_start_no_label = tk.Label(window, text="Script Start no.:")
-        self.no_of_scripts_label = tk.Label(window, text="Number of scripts:")
-        self.data_operator_name_label = tk.Label(window, text="Data Operator Name:")
-        self.submit_button = tk.Button(window, text="Continue", command=self.submit)
+        self.subject_code_label = tk.Label(self, text="Subject Code:")
+        self.title_label = tk.Label(self, text="Subject Title:")
+        self.script_code_label = tk.Label(self, text="Script Code:")
+        self.script_start_no_label = tk.Label(self, text="Script Start no.:")
+        self.no_of_scripts_label = tk.Label(self, text="Number of scripts:")
+        self.data_operator_name_label = tk.Label(self, text="Data Operator Name:")
+        self.submit_button = tk.Button(self, text="Continue", command=self.submit)
 
-        validation = window.register(self.only_numeric_input)
+        validation = self._register(self.only_numeric_input)
 
-        self.subject_code_input = tk.Entry(window)
-        self.title_input = tk.Entry(window)
-        self.script_code_input = tk.Entry(window, validate = "key",  validatecommand=(validation, '%S'))
-        self.script_start_no_input = tk.Entry(window, validate = "key",  validatecommand=(validation, '%S'))
-        self.no_of_scripts_input = tk.Entry(window, validate = "key",  validatecommand=(validation, '%S'))
-        self.data_operator_name_input = tk.Entry(window)
+        self.subject_code_input = tk.Entry(self)
+        self.title_input = tk.Entry(self)
+        self.script_code_input = tk.Entry(self, validate = "key",  validatecommand=(validation, '%S'))
+        self.script_start_no_input = tk.Entry(self, validate = "key",  validatecommand=(validation, '%S'))
+        self.no_of_scripts_input = tk.Entry(self, validate = "key",  validatecommand=(validation, '%S'))
+        self.data_operator_name_input = tk.Entry(self)
         self.entry_1_input = tk.Radiobutton(
-            window, text='Entry 1', value=1, variable=self.entry)
+            self, text='Entry 1', value=1, variable=self.entry)
         self.entry_2_input = tk.Radiobutton(
-            window, text='Entry 2', value=2, variable=self.entry)
+            self, text='Entry 2', value=2, variable=self.entry)
 
         self.subject_code_label.grid(row=0, column=0)
         self.title_label.grid(row=1, column=0)
@@ -90,6 +92,10 @@ class FirstScreen:
         if not valid:
             tk.messagebox.showerror('error', validation_error)
 
+        if valid:
+                self.controller.show_frame("DataScreen")
+                
+
 
     def only_numeric_input(self, e):
         if e.isdigit():
@@ -98,9 +104,3 @@ class FirstScreen:
             return True
         else:
             return False
-
-window = tk.Tk()
-mywin = FirstScreen(window)
-window.title("Data entry registration")
-window.geometry("1366x760+10+10")
-window.mainloop()
