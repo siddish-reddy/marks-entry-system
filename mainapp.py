@@ -37,4 +37,5 @@ class SampleApp(tk.Tk):
 
 if __name__ == "__main__":
     app = SampleApp()
+    app.attributes('-zoomed', True)
     app.mainloop()
