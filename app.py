@@ -1,13 +1,12 @@
 import tkinter as tk
-from screen import DataScreen
-from data_entry import FirstScreen
+from init_screen import FirstScreen
+from data_entry_screen import DataScreen
+
 
 class SampleApp(tk.Tk):
 
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
-
-        # self.title_font = tkfont.Font(family='Helvetica', size=18, weight="bold", slant="italic")
 
         # the container is where we'll stack a bunch of frames
         # on top of each other, then the one we want visible
@@ -34,6 +33,7 @@ class SampleApp(tk.Tk):
         '''Show a frame for the given page name'''
         frame = self.frames[page_name]
         frame.tkraise()
+
 
 if __name__ == "__main__":
     app = SampleApp()

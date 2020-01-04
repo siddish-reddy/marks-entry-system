@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 
+
 class FirstScreen(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -19,16 +20,21 @@ class FirstScreen(tk.Frame):
         self.script_code_label = tk.Label(self, text="Script Code:")
         self.script_start_no_label = tk.Label(self, text="Script Start no.:")
         self.no_of_scripts_label = tk.Label(self, text="Number of scripts:")
-        self.data_operator_name_label = tk.Label(self, text="Data Operator Name:")
-        self.submit_button = tk.Button(self, text="Continue", command=self.submit)
+        self.data_operator_name_label = tk.Label(self,
+                                                 text="Data Operator Name:")
+        self.submit_button = tk.Button(self,
+                                       text="Continue", command=self.submit)
 
         validation = self._register(self.only_numeric_input)
 
         self.subject_code_input = tk.Entry(self)
         self.title_input = tk.Entry(self)
-        self.script_code_input = tk.Entry(self, validate = "key",  validatecommand=(validation, '%S'))
-        self.script_start_no_input = tk.Entry(self, validate = "key",  validatecommand=(validation, '%S'))
-        self.no_of_scripts_input = tk.Entry(self, validate = "key",  validatecommand=(validation, '%S'))
+        self.script_code_input = tk.Entry(
+            self, validate="key",  validatecommand=(validation, '%S'))
+        self.script_start_no_input = tk.Entry(
+            self, validate="key",  validatecommand=(validation, '%S'))
+        self.no_of_scripts_input = tk.Entry(
+            self, validate="key",  validatecommand=(validation, '%S'))
         self.data_operator_name_input = tk.Entry(self)
         self.entry_1_input = tk.Radiobutton(
             self, text='Entry 1', value=1, variable=self.entry)
@@ -90,12 +96,10 @@ class FirstScreen(tk.Frame):
             valid = False
 
         if not valid:
-            tk.messagebox.showerror('error', validation_error)
+            messagebox.showerror('error', validation_error)
 
         if valid:
-                self.controller.show_frame("DataScreen")
-                
-
+            self.controller.show_frame("DataScreen")
 
     def only_numeric_input(self, e):
         if e.isdigit():

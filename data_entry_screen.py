@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 
+
 class DataScreen(tk.Frame):
 
     def back(self):
@@ -16,16 +17,15 @@ class DataScreen(tk.Frame):
         self.l4 = tk.Label(self, text='Marks/Reg No.')
 
         validation = self._register(self.only_numeric_input)
-        
 
         self.t1 = tk.Label(self, text='Entry')
         self.t2 = tk.Label(self, text='Subject Code')
         self.t3 = tk.Label(self, text='Something')
         self.t4 = tk.Entry(self, validate="key",
-                        validatecommand=(validation, '%S'))
+                           validatecommand=(validation, '%S'))
 
         self.enterData = tk.Button(self, text="Enter Data",
-                                command=self.finalValidation)
+                                   command=self.finalValidation)
         self.back = tk.Button(self, text="Back", command=self.back)
 
         self.l1.place(x=200, y=100)
@@ -45,7 +45,7 @@ class DataScreen(tk.Frame):
         if e.isdigit():
             return True
         elif e == "":
-            return True
+            return False
         else:
             return False
 
