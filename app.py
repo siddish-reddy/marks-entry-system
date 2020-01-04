@@ -17,9 +17,10 @@ class SampleApp(tk.Tk):
         container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-        for F in (FirstScreen, DataScreen):
+        self.pages = (FirstScreen, DataScreen)
+        for F in self.pages:
             page_name = F.__name__
-            frame = F(parent=container, controller=self)
+            frame = F(parent=container, controller=self, pages=self.pages)
             self.frames[page_name] = frame
 
             # put all of the pages in the same location;
@@ -37,4 +38,5 @@ class SampleApp(tk.Tk):
 
 if __name__ == "__main__":
     app = SampleApp()
+    app.attributes('-zoomed', True)
     app.mainloop()
