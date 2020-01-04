@@ -4,7 +4,7 @@ from tkinter import messagebox
 class DataScreen(tk.Frame):
 
     def back(self):
-        self.destroy()
+        self.controller.show_frame("FirstScreen")
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
