@@ -2,9 +2,11 @@ import tkinter as tk
 from tkinter import messagebox
 
 class FirstScreen(tk.Frame):
-    def __init__(self, parent, controller):
+    def __init__(self, parent, controller, pages):
         tk.Frame.__init__(self, parent)
+        
         self.controller = controller
+        self.pages = pages
 
         self.subject_code = tk.StringVar()
         self.title = tk.StringVar()
@@ -93,7 +95,10 @@ class FirstScreen(tk.Frame):
             tk.messagebox.showerror('error', validation_error)
 
         if valid:
-                self.controller.show_frame("DataScreen")
+            self.controller.frames['DataScreen'].entryVal.config(text=self.entry)
+            self.controller.frames['DataScreen'].subjectCodeVal.config(text=self.subject_code_input.get())
+            self.controller.frames['DataScreen'].scriptNoVal.config(text=self.script_code_input.get())
+            self.controller.show_frame("DataScreen")
                 
 
 
