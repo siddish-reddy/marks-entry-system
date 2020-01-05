@@ -1,4 +1,5 @@
 __pycache__
 __pytestcache__
 db.l*
+secrets.py
 .vscode
