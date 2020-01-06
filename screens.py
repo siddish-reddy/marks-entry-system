@@ -7,28 +7,38 @@ db = None
 class FirstScreen:
     def __init__(self, root):
         # creating labels
-        subject_code_label = tk.Label(root, text="Subject Code")
-        title_label = tk.Label(root, text="Subject Title")
-        script_code_label = tk.Label(root, text="Script Code")
-        starting_script_code_label = tk.Label(
-            root, text="Script Starting Code")
-        no_of_scripts_label = tk.Label(root, text="No. of Scripts")
-        operator_label = tk.Label(root, text="Data Operator Name")
-        entry_label = tk.Label(root, text="Choose Entry")
+        subject_code_label = tk.Label(root, text="Subject Code",
+                                      font=("Helvetica", 16))
+        title_label = tk.Label(root, text="Subject Title",
+                               font=("Helvetica", 16))
+        script_code_label = tk.Label(root, text="Script Code",
+                                     font=("Helvetica", 16))
+        starting_script_code_label = tk.Label(root,
+                                              text="Script Starting Code",
+                                              font=("Helvetica", 16))
+        no_of_scripts_label = tk.Label(root, text="No. of Scripts",
+                                       font=("Helvetica", 16))
+        operator_label = tk.Label(root, text="Data Operator Name",
+                                  font=("Helvetica", 16))
+        entry_label = tk.Label(root, text="Choose Entry",
+                               font=("Helvetica", 16))
 
         validation = root.register(self.only_numeric_input)
 
         # creating entries
-        subject_code_entry = tk.Entry(root)
-        title_entry = tk.Entry(root)
+        subject_code_entry = tk.Entry(root, font=('courier', 16, 'bold'))
+        title_entry = tk.Entry(root, font=('courier', 16, 'bold'))
         script_code_entry = tk.Entry(root, validate="key",
-                                     validatecommand=(validation, '%S'))
+                                     validatecommand=(validation, '%S'),
+                                     font=('courier', 16, 'bold'))
         starting_script_code_entry = tk.Entry(root, validate="key",
-                                              validatecommand=(validation, '%S'))
+                                              validatecommand=(validation, '%S'),
+                                              font=('courier', 16, 'bold'))
         no_of_scripts_entry = tk.Entry(root, validate="key",
-                                       validatecommand=(validation, '%S'))
-        operator_entry = tk.Entry(root)
-        entry_entry = tk.Entry(root)
+                                       validatecommand=(validation, '%S'),
+                                       font=('courier', 16, 'bold'))
+        operator_entry = tk.Entry(root, font=('courier', 16, 'bold'))
+        entry_entry = tk.Entry(root, font=('courier', 16, 'bold'))
 
         def submit():
             subject_code = subject_code_entry.get()
@@ -86,12 +96,14 @@ class FirstScreen:
                 global db
                 db = db_helper.Database(subject_code, title,
                                         starting_script_code, no_of_scripts,
-                                        entry, operator_label)
+                                        entry, operator)
                 tk.messagebox.showinfo('Proceeding for registrations entry')
 
                 dataScreen = SecondScreen(window, data_object)
 
-        continue_button = tk.Button(root, text="Continue", command=submit)
+        continue_button = tk.Button(root, text="Continue", command=submit,
+                                    font=("Helvetica", 20, 'bold'),
+                                    padx=10, pady=10)
 
         # Rendering all elements
         subject_code_label.place(x=200, y=100)
@@ -102,15 +114,15 @@ class FirstScreen:
         operator_label.place(x=200, y=350)
         entry_label.place(x=200, y=400)
 
-        subject_code_entry.place(x=500, y=100)
-        title_entry.place(x=500, y=150)
-        script_code_entry.place(x=500, y=200)
-        starting_script_code_entry.place(x=500, y=250)
-        no_of_scripts_entry.place(x=500, y=300)
-        operator_entry.place(x=500, y=350)
-        entry_entry.place(x=500, y=400)
+        subject_code_entry.place(x=500, y=100, width=200, height=35)
+        title_entry.place(x=500, y=150, width=200, height=35)
+        script_code_entry.place(x=500, y=200, width=200, height=35)
+        starting_script_code_entry.place(x=500, y=250, width=200, height=35)
+        no_of_scripts_entry.place(x=500, y=300, width=200, height=35)
+        operator_entry.place(x=500, y=350, width=200, height=35)
+        entry_entry.place(x=500, y=400, width=200, height=35)
 
-        continue_button.place(x=400, y=470)
+        continue_button.place(x=400, y=470, width=150, height=40)
 
     def only_numeric_input(self, e):
         if e.isdigit():
@@ -137,18 +149,24 @@ class FirstScreen:
 
 class SecondScreen:
     def __init__(self, root, data):
-        subject_code_label = tk.Label(root, text="Subject Code")
-        script_code_label = tk.Label(root, text="Script Code")
-        entry_label = tk.Label(root, text="Entry")
-        marks_label = tk.Label(root, text="Marks")
+        subject_code_label = tk.Label(root, text="Subject Code",
+                                      font=("Helvetica", 16))
+        script_code_label = tk.Label(root, text="Script Code",
+                                     font=("Helvetica", 16))
+        entry_label = tk.Label(root, text="Entry", font=("Helvetica", 16))
+        marks_label = tk.Label(root, text="Marks", font=("Helvetica", 16))
 
         validation = root.register(self.only_numeric_input)
 
-        subject_code_value = tk.Label(root, text=data[0])
-        script_code_value = tk.Label(root, text=data[2])
-        entry_value = tk.Label(root, text=data[2])
+        subject_code_value = tk.Label(root, text=data[0],
+                                      font=('courier', 16))
+        script_code_value = tk.Label(root, text=data[2],
+                                     font=('courier', 16))
+        entry_value = tk.Label(root, text=data[2],
+                               font=('courier', 16))
         marks_reg_value = tk.Entry(root, validate="key",
-                                   validatecommand=(validation, '%S'))
+                                   validatecommand=(validation, '%S'),
+                                   font=('courier', 18, 'bold'))
 
         def submit():
             # Insert Data to DataBase
@@ -159,7 +177,9 @@ class SecondScreen:
             data[2] = script_code
             script_code_value.config(text=script_code)
 
-        enter_button = tk.Button(root, text="Enter", command=submit)
+        enter_button = tk.Button(root, text="Enter", command=submit,
+                                 font=("Helvetica", 20, 'bold'),
+                                 padx=10, pady=10)
 
         # render all elements
         subject_code_label.place(x=200, y=100)
@@ -170,9 +190,9 @@ class SecondScreen:
         subject_code_value.place(x=500, y=100)
         script_code_value.place(x=500, y=150)
         entry_value.place(x=500, y=200)
-        marks_reg_value.place(x=500, y=250)
+        marks_reg_value.place(x=500, y=250, width=200, height=35)
 
-        enter_button.place(x=200, y=300)
+        enter_button.place(x=200, y=300, width=150, height=40)
 
     def only_numeric_input(self, e):
         if e.isdigit():
@@ -186,6 +206,6 @@ class SecondScreen:
 if __name__ == "__main__":
     window = tk.Tk()
     first_screen = FirstScreen(window)
-    window.geometry("900x500+10+10")
-    window.title("")
+    window.geometry("900x650+10+10")
+    window.title("Marks Entry System")
     window.mainloop()
