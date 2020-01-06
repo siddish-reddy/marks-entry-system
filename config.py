@@ -1,5 +1,5 @@
-DEBUG = False
-DB_FILE = 'db.accdb'
+DEBUG = True
+DB_FILE = 'marks_db.accdb'
 
 try:
     from secrets import PWD
