@@ -4,7 +4,7 @@ from tkinter import messagebox
 
 class FirstScreen(tk.Frame):
     def __init__(self, parent, controller, pages):
-        
+
         tk.Frame.__init__(self, parent)
 
         self.controller = controller
@@ -73,7 +73,8 @@ class FirstScreen(tk.Frame):
         validation_error = ''
         valid = True
 
-        if subject == '' or title == '':
+        if subject == '' or title == '' or \
+           script == '' or script_start_no == '':
             validation_error += "~ Subject or title should not be empty\n\n"
             valid = False
 
@@ -91,7 +92,8 @@ class FirstScreen(tk.Frame):
         else:
             no_of_scripts = int(no_of_scripts)
             if no_of_scripts <= 0:
-                validation_error += '~ Number of scripts should be a positive\n\n'
+                validation_error += '~ Number of scripts\
+                                    should be a positive\n\n'
                 valid = False
 
         if len(data_operator_name) < 5:
@@ -100,8 +102,7 @@ class FirstScreen(tk.Frame):
 
         if not valid:
             messagebox.showerror('error', validation_error)
-
-        if valid:
+        else:
             self.controller.frames['DataScreen'].entryVal.config(text=self.entry)
             self.controller.frames['DataScreen'].subjectCodeVal.config(text=self.subject_code_input.get())
             self.controller.frames['DataScreen'].scriptNoVal.config(text=self.script_code_input.get())
