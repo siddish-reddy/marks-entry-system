@@ -48,12 +48,7 @@ class DataScreen(tk.Frame):
         self.enterData.place(x=500, y=600)
 
     def only_numeric_input(self, e):
-        if e.isdigit():
-            return True
-        elif e == "":
-            return False
-        else:
-            return False
+        return bool(e.isdigit())
 
     def finalValidation(self):
         marks = self.t4.get()
