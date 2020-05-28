@@ -125,12 +125,7 @@ class FirstScreen:
         continue_button.place(x=400, y=470, width=150, height=40)
 
     def only_numeric_input(self, e):
-        if e.isdigit():
-            return True
-        elif e == "":
-            return True
-        else:
-            return False
+        return bool(e.isdigit() or not e.isdigit() and e == "")
 
     def all_children(self, window):
         _list = window.winfo_children()
@@ -195,12 +190,7 @@ class SecondScreen:
         enter_button.place(x=200, y=300, width=150, height=40)
 
     def only_numeric_input(self, e):
-        if e.isdigit():
-            return True
-        elif e == "":
-            return True
-        else:
-            return False
+        return bool(e.isdigit() or not e.isdigit() and e == "")
 
 
 if __name__ == "__main__":

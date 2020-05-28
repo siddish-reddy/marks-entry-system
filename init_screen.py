@@ -109,9 +109,4 @@ class FirstScreen(tk.Frame):
             self.controller.show_frame("DataScreen")
 
     def only_numeric_input(self, e):
-        if e.isdigit():
-            return True
-        elif e == "":
-            return True
-        else:
-            return False
+        return bool(e.isdigit() or not e.isdigit() and e == "")
